@@ -1,0 +1,59 @@
+services:
+  angels-db:
+    image: postgres:16-alpine
+    container_name: angels-db
+    environment:
+      POSTGRES_DB: angels_db
+      POSTGRES_USER: angels_user
+      POSTGRES_PASSWORD: angels_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  angels-jwt-server:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: angels-jwt-server
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak/themes:/opt/keycloak/themes
+    depends_on:
+      - angels-db
+
+  angels-backend:
+    build:
+      context: ../angels-backend
+      dockerfile: Dockerfile
+      target: builder
+    command: sleep infinity
+    # AJOUTE CETTE SECTION :
+    volumes:
+      # On monte le dossier parent (la racine /angels) sur /app dans le conteneur
+      - ../:/app
+      # On isole le node_modules pour éviter les conflits d'OS
+      - /app/angels-backend/node_modules
+    container_name: angels-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - OBSERVE_ENABLED=false
+    depends_on:
+      - angels-db
+
+  angels-frontend:
+    build:
+      context: ../angels-frontend
+      dockerfile: Dockerfile
+    container_name: angels-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - angels-backend
+
+volumes:
+  postgres_data:

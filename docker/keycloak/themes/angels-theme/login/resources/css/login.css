@@ -1,0 +1,169 @@
+/* --- Arrière-plan de la page --- */
+.login-pf body {
+  background: url("./angels bckg 009.jpg") no-repeat center fixed !important;
+  background-size: cover;
+  height: 100%;
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --- Halo de lumière céleste animé --- */
+.login-pf body::before {
+  content: "";
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  width: 100vw;
+  height: 70vh;
+  transform: transformX(-50%);
+  /* Dégradé radial simulant un faisceau lumineux venant du haut */
+  background: radial-gradient(
+    ellipse at top,
+    rgba(236, 215, 122, 0.575) 0%,
+    rgba(150, 209, 255, 0.699) 40%,
+    transparent 70%
+  );
+
+  pointer-events: none; /* Laisse passer les clics à travers le halo */
+  z-index: 1; /* Place le halo entre le fond et le contenu */
+  animation: celestialGlow 4s ease-in-out infinite alternate;
+}
+
+/* Animation de pulsation et de balancement subtil de la lumière */
+@keyframes celestialGlow {
+  0% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(0.95) rotate(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05) rotate(1);
+  }
+}
+
+/* Animation de décalage horizontal subtil pour simuler les faisceaux qui ondulent */
+@keyframes lightRaysMove {
+  0% {
+    transform: translateX(-5%) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(5%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* S'assurer que le contenu (carte de connexion) reste au premier plan */
+.login-pf-page {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- En-tête (ANGELS-REALM) --- */
+#kc-header {
+  color: #ededed;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+#kc-header-wrapper {
+  font-size: 29px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.2em;
+  padding: 62px 10px 20px;
+  white-space: normal;
+}
+
+.login-pf-page .login-pf-page-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-pf-page .login-pf-header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.h1,
+.h2,
+h1,
+h2 {
+  font-weight: 700;
+}
+
+/* --- Carte de connexion principale --- */
+.card-pf {
+  margin: 0 auto;
+  color: cyan;
+  font-weight: 700;
+  background-color: #7c7c7c54;
+  border: 1px solid;
+  border-radius: 8px;
+  box-shadow: var(
+    --pf-global--BoxShadow--lg,
+    0 0.5rem 1rem 0 rgba(3, 3, 3, 0.16)
+  );
+  padding: 0 20px;
+  max-width: 500px;
+  border-top: 4px solid #4f9bd19e;
+}
+
+/* --- Champs de formulaire (Username, Password, etc.) --- */
+.pf-c-form-control {
+  color: #fff;
+  background-color: transparent !important;
+}
+
+.pf-c-form-control:not(textarea) {
+  text-overflow: ellipsis;
+}
+
+/* --- Correction spécifique pour l'input de mot de passe et son conteneur --- */
+.pf-c-input-group,
+.pf-c-input-group .pf-c-form-control,
+#password {
+  background-color: transparent !important;
+}
+
+/* --- Bouton œil (Afficher/Masquer le mot de passe) --- */
+.pf-c-input-group .pf-c-button.pf-m-control {
+  background-color: transparent !important;
+  color: #fff;
+  border-color: #8c8c8c;
+}
+
+/* --- Checkbox "Remember Me" --- */
+#rememberMe,
+.pf-c-check,
+.pf-c-check__input {
+  background-color: transparent !important;
+}
+
+/* --- Bouton de connexion principal --- */
+.pf-c-button.pf-m-primary {
+  color: #fff;
+  background-color: rgba(4, 189, 149, 0.541);
+}
+
+.pf-c-button.pf-m-primary:hover,
+.pf-c-button.pf-m-primary:focus {
+  background-color: rgb(4, 189, 149);
+}
+
+/* --- Responsive (Media Queries) --- */
+@media (min-width: 768px) {
+  .login-pf-page .login-pf-page-header {
+    margin-bottom: 40px;
+  }
+  .login-pf-page .card-pf {
+    padding: 20px 40px 30px 40px;
+  }
+  .login-pf-page .login-pf-header {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+}

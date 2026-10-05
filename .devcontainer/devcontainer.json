@@ -1,0 +1,26 @@
+{
+  "name": "Full-Stack Angels DevContainer",
+  "dockerComposeFile": "../docker/docker-compose.yml",
+  "service": "angels-backend",
+  // Indique à VS Code où se trouve le code à l'intérieur du conteneur
+  "workspaceFolder": "/app",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "angular.ng-template",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "editor.formatOnSave": true
+      }
+    }
+  },
+
+  "forwardPorts": [80, 3000, 5432, 8080],
+
+  "postCreateCommand": "cd angels-backend && npm install && cd ../angels-frontend && npm install"
+}
