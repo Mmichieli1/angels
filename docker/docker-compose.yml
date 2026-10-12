@@ -31,11 +31,10 @@ services:
       dockerfile: Dockerfile
       target: builder
     command: sleep infinity
-    # AJOUTE CETTE SECTION :
     volumes:
-      # On monte le dossier parent (la racine /angels) sur /app dans le conteneur
+      # Montage du dossier parent (la racine /angels) sur /app
       - ../:/app
-      # On isole le node_modules pour éviter les conflits d'OS
+      # Isolation du node_modules pour éviter les conflits d'OS
       - /app/angels-backend/node_modules
     container_name: angels-backend
     ports:
