@@ -20,11 +20,13 @@ jobs:
       - name: 3. Installation et build/lancement du Backend
         run: |
           cd angels-backend
+          sudo chown -R $USER:$USER .
           npm ci
           npm run build
 
       - name: 4. Installation et build du Frontend
         run: |
           cd angels-frontend
+          sudo chown -R $USER:$USER .
           npm ci
           npm run build
