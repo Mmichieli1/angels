@@ -4,12 +4,19 @@ on:
   push:
     branches:
       - develop
+  pull_request:
+    branches:
+      - '**'
+      - '!develop'
 
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Info branche
+        run: echo "Déploiement test pour la branche ${GITHUB_REF_NAME}"
+        
       - name: 1. Récupération du code
         uses: actions/checkout@v4
 
