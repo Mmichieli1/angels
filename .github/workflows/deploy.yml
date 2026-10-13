@@ -1,0 +1,32 @@
+name: Faux Deploiement Local
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Récupération du code
+        uses: actions/checkout@v4
+
+      - name: 2. Lancement des conteneurs Docker (Keycloak, etc.)
+        run: |
+          docker compose -f docker/docker-compose.yml up -d --build
+
+      - name: 3. Installation et build/lancement du Backend
+        run: |
+          cd angels-backend
+          sudo chown -R $USER:$USER .
+          npm ci
+          npm run build
+
+      - name: 4. Installation et build du Frontend
+        run: |
+          cd angels-frontend
+          sudo chown -R $USER:$USER .
+          npm ci
+          npm run build
