@@ -20,11 +20,11 @@ jobs:
       - name: 3. Installation et build/lancement du Backend
         run: |
           cd angels-backend
-          npm install
+          npm ci
           npm run build
 
       - name: 4. Installation et build du Frontend
         run: |
           cd angels-frontend
-          npm install
+          npm ci
           npm run build
