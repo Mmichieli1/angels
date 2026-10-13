@@ -15,7 +15,7 @@ jobs:
 
       - name: 2. Lancement des conteneurs Docker (Keycloak, etc.)
         run: |
-          docker compose up -d --build
+          docker compose -f angels-backend/docker-compose.yml up -d --build
 
       - name: 3. Installation et build/lancement du Backend
         run: |
